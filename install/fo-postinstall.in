@@ -310,6 +310,14 @@ if [[ $WEBONLY ]]; then
     usermod --groups $PROJECTGROUP --append apache
   fi
 
+  # check for http (Arch, etc)
+  if grep -q "^http:" /etc/passwd; then
+    echo "NOTE: Adding user http to group $PROJECTGROUP"
+    # this is smart enough to not add multiple times so it's ok to repeat
+    usermod --groups $PROJECTGROUP --append http
+  fi
+
+
   # Enable mod_rewrite for REST API
   if [[ -f /etc/httpd/conf.modules.d/00-base.conf ]]; then
     # We are on RHEL
@@ -323,6 +331,16 @@ if [[ $WEBONLY ]]; then
     if ! a2query -q -m rewrite; then
       echo "NOTE: Enabling apache module rewrite"
       /usr/sbin/a2enmod rewrite
+      RESTART_MESSAGE=true
+    fi
+  fi
+
+  # Enable mod_rewrite for REST API on Arch
+  if [[ -f /etc/httpd/conf/httpd.conf ]]; then
+    # We are on Arch
+    if egrep -q "#LoadModule rewrite_module modules/mod_rewrite.so" /etc/httpd/conf/httpd.conf; then
+      echo "NOTE: Enabling apache module rewrite"
+      sed '/LoadModule rewrite_module modules\/mod_rewrite.so/s/^#//' -i /etc/httpd/conf/httpd.conf
       RESTART_MESSAGE=true
     fi
   fi

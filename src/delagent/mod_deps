@@ -72,6 +72,10 @@ if [[ $BUILDTIME ]]; then
       yum $YesOpt install \
         libgcrypt-devel
       ;;
+    ManjaroLinux)
+      pacman $YesOpt -S \
+        libgcrypt
+      ;;
   esac
 fi
 
@@ -84,6 +88,10 @@ if [[ $RUNTIME ]]; then
       ;;
     RedHatEnterprise*|CentOS|Fedora)
       yum $YesOpt install \
+        libgcrypt
+      ;;
+    ManjaroLinux)
+      pacman $YesOpt install \
         libgcrypt
       ;;
   esac

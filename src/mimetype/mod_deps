@@ -72,6 +72,10 @@ if [[ $BUILDTIME ]]; then
       yum $YesOpt install \
         file-devel
       ;;
+    ManjaroLinux)
+      pacman $YesOpt -S \
+        file
+      ;;
   esac
 fi
 
@@ -85,6 +89,10 @@ if [[ $RUNTIME ]]; then
     RedHatEnterprise*|CentOS|Fedora)
       yum $YesOpt install \
         file-libs
+      ;;
+    ManjaroLinux)
+      pacman $YesOpt -S \
+        file
       ;;
   esac
 fi

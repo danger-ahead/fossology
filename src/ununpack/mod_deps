@@ -72,6 +72,10 @@ if [ $BUILDTIME ]; then
       yum $YesOpt install \
         libgcrypt-devel
       ;;
+    ManjaroLinux)
+      pacman $YesOpt -S \
+        libgcrypt
+      ;;
   esac
 fi
 
@@ -92,6 +96,11 @@ if [ $RUNTIME ]; then
       yum $YesOpt install \
         bzip2 cabextract cpio genisoimage p7zip p7zip-plugins poppler-utils rpm\
         tar upx unzip gzip sleuthkit unrar libgcrypt
+      ;;
+    ManjaroLinux)
+      pacman $YesOpt -S \
+        bzip2 cabextract cpio genisoimage p7zip poppler-utils rpm tar upx-ucl \
+        unzip gzip p7zip-full unrar libgcrypt
       ;;
   esac
 fi

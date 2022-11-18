@@ -78,6 +78,10 @@ if [[ $BUILDTIME ]]; then
       yum $YesOpt install \
         jsoncpp-devel
       ;;
+    ManjaroLinux)
+      pacman $YesOpt -S \
+        jsoncpp
+      ;;
     *) echo "ERROR: Unknown or Unsupported $DISTRO $CODENAME release, please report to the mailing list"; exit 1;;
   esac
 fi
@@ -108,6 +112,10 @@ if [[ $RUNTIME ]]; then
     RedHatEnterprise*|CentOS)
       yum $YesOpt install epel-release;
       yum $YesOpt install \
+        jsoncpp
+      ;;
+    ManjaroLinux)
+      pacman $YesOpt -S \
         jsoncpp
       ;;
     *) echo "ERROR: Unknown or Unsupported $DISTRO $CODENAME release, please report to the mailing list"; exit 1;;

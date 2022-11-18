@@ -78,6 +78,11 @@ if [[ $BUILDTIME ]]; then
         boost-devel jsoncpp-devel \
         zlib bzip2-libs xz-libs libxml2-devel libxslt-devel libpopt0
       ;;
+    ManjaroLinux)
+      pacman $YesOpt -S \
+        boost jsoncpp \
+        zlib xz bzip2 libxml2 libxslt bzip2 popt
+      ;;
     *) echo "ERROR: Unknown or Unsupported $DISTRO $CODENAME release, please report to the mailing list"; exit 1;;
   esac
 fi
@@ -115,6 +120,11 @@ if [[ $RUNTIME ]]; then
       yum $YesOpt install \
         jsoncpp boost \
         zlib bzip2-libs xz-libs libxml2-devel libxslt-devel libpopt0
+      ;;
+    ManjaroLinux)
+      pacman $YesOpt -S \
+        jsoncpp boost \
+        zlib xz bzip2 libxml2 libxslt bzip2 popt
       ;;
     *) echo "ERROR: Unknown or Unsupported $DISTRO $CODENAME release, please report to the mailing list"; exit 1;;
   esac

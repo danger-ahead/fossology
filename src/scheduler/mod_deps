@@ -71,6 +71,10 @@ if [[ $BUILDTIME ]]; then
       yum $YesOpt install \
         glib2-devel
       ;;
+    ManjaroLinux)
+      pacman $YesOpt -S \
+        glib2
+      ;;
     *) echo "ERROR: distro not recognised, please fix and send a patch"; exit 1;;
   esac
 fi
@@ -84,6 +88,10 @@ if [[ $RUNTIME ]]; then
       ;;
     RedHatEnterprise*|CentOS|Fedora)
       yum $YesOpt install \
+        glib2
+      ;;
+    ManjaroLinux)
+      pacman $YesOpt -S \
         glib2
       ;;
   esac

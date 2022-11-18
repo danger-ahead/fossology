@@ -72,6 +72,10 @@ if [[ $BUILDTIME ]]; then
       yum $YesOpt install \
         json-c-devel
       ;;
+    ManjaroLinux)
+      pacman $YesOpt -S \
+        json-c
+      ;;
     *) echo "ERROR: Unknown or Unsupported $DISTRO $CODENAME release, please report to the mailing list"; exit 1;;
   esac
 fi
@@ -93,6 +97,10 @@ if [[ $RUNTIME ]]; then
       esac;;
     Fedora|RedHatEnterprise*|CentOS)
       yum $YesOpt install \
+        json-c
+      ;;
+    ManjaroLinux)
+      pacman $YesOpt -S \
         json-c
       ;;
     *) echo "ERROR: Unknown or Unsupported $DISTRO $CODENAME release, please report to the mailing list"; exit 1;;

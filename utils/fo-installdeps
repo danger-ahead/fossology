@@ -145,8 +145,18 @@ if [[ $BUILDTIME ]]; then
             postgresql-devel \
             gcc make file libxml2 \
             perl-Text-Template subversion \
-            boost-devel php-mbstring libicu-devel libpq-devel patch
+            boost-devel php-mbstring libicu-devel patch \
+            postgresql-libs
          ;;
+      ManjaroLinux)
+         pacman $YesOpt -S \
+            gcc make file \
+            postgresql-libs perl-text-template php \
+            php-pgsql rpm-tools php-gd php-sqlite \
+            gettext libxml2 subversion boost \
+            icu python-pyicu patch autoconf pkgconf
+         ;;
+         echo "*** php-uuid is not available in pacman. Please install it from AUR. ***"
       *) echo "ERROR: distro not recognised, please fix and send a patch"; exit 1;;
    esac
 fi
@@ -232,6 +242,19 @@ if [[ $RUNTIME ]]; then
             binutils mailx boost libicu
          echo "NOTE: cabextract, sleuthkit, upx, and unrar are not"
          echo "    available in RHEL please install from upstream sources."
+         ;;
+      ManjaroLinux)
+         pacman $YesOpt -S \
+            postgresql upx \
+            apache php php-pgsql sleuthkit \
+            file libxml2 cabextract \
+            binutils mailx boost icu unrar
+
+         # enable, possible init, and start postgresql
+         if [ ! -f /var/lib/postgres/data/PG_VERSION ]; then
+            sudo -i -u postgres initdb  -D '/var/lib/postgres/data'
+         fi
+         systemctl start postgresql       
          ;;
       *) echo "ERROR: distro not recognised, please fix and send a patch"; exit 1;;
    esac

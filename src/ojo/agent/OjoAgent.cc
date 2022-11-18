@@ -5,6 +5,7 @@
 */
 
 #include "OjoAgent.hpp"
+#include <sstream>
 
 using namespace std;
 

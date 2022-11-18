@@ -18,7 +18,7 @@
 #include <vector>
 
 #include <boost/tokenizer.hpp>
-#include <jsoncpp/json/json.h>
+#include <json/json.h>
 
 #include "files.hpp"
 #include "match.hpp"

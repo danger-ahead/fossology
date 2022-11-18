@@ -34,7 +34,8 @@ need_lsb_release() {
   hash lsb_release 2>/dev/null || { cat >&2 <<EOF
 ERROR: this program requires the lsb_release command. On Debian based
   systems this is probably in the lsb-release package, on
-  Fedora/RedHat systems it is probably the redhat-lsb package.
+  Fedora/RedHat systems it is probably the redhat-lsb package, on Arch based systems
+  it is probably in the lsb-release package.
 Aborting.
 EOF
   exit 1; }
@@ -124,6 +125,10 @@ if [[ $BUILDTIME && -z "$DEBIAN" ]]; then
       yum $YesOpt install \
         python3-pip
       ;;
+    ManjaroLinux)
+      pacman $YesOpt -S \
+        python-pip
+      ;;
     *) echo "ERROR: distro not recognised, please fix and send a patch"; exit 1;;
   esac
 fi
@@ -140,6 +145,10 @@ if [[ $RUNTIME && -z "$DEBIAN" ]]; then
     Fedora|RedHatEnterprise*|CentOS)
       yum $YesOpt install \
         python3-pip python3-devel
+      ;;
+    ManjaroLinux)
+      pacman $YesOpt -S \
+        python-pip
       ;;
     *) echo "ERROR: distro not recognised, please fix and send a patch"; exit 1;;
   esac
